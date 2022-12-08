@@ -28,5 +28,24 @@ void main()
      *        - Via .xyz you can access the first three components of a vec4
      */
 
+    //transform normal to eye coordinates
+    v2f_normal = normalize(normal_matrix * v_normal);
+    
+    // direction to light source (in eye space)
+    //.xyz wird gemacht um nur auf die ersten drei wert des vec4 zuzugreifen
+    v2f_light = normalize(light_position.xyz - (modelview_matrix * v_position).xyz); 
+    
+    //viewing vector (from vertex to eye in view_coordinates) siehe kommentar neben deklarierung der var
+    // Eye position is origin
+    v2f_view = normalize(-(modelview_matrix * v_position).xyz);
+
+    //Rest uebernommen aus ich glaube color.frag ??
+    // pass through texture coordinate
+    v2f_texcoord = v_texcoord;
+    
+    // transform vertex by modelview and projection matrix
+    gl_Position = modelview_projection_matrix * v_position;
+
+
 
 } 

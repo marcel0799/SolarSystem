@@ -588,6 +588,28 @@ void Solar_viewer::draw_scene(mat4& projection, mat4& view)
     stars_.texture_.bind();     //shade the texture
     unit_sphere_mesh_.draw();   //draw everything
 
+    //EARTH_SHADER
+    earth_shader_.use();
+    //berechnen der mvp
+    m_matrix = earth_.model_matrix_;
+    mv_matrix = view * m_matrix;
+    mvp_matrix = projection * mv_matrix;
+    //die strings muessen genau dem namen aus dem out aus dem shader entsprechen
+    earth_shader_.set_uniform("modelview_projection_matrix", mvp_matrix);
+    earth_shader_.set_uniform("modelview_matrix", mv_matrix);
+    earth_shader_.set_uniform("normal_matrix", n_matrix);
+    earth_shader_.set_uniform("greyscale", (int)greyscale_);
+    earth_shader_.set_uniform("light_position", light);
+
+    earth_shader_.set_uniform("day_texture", 0);
+    earth_shader_.set_uniform("night_texture", 1);
+    earth_shader_.set_uniform("cloud_texture", 2);
+    earth_shader_.set_uniform("gloss_texture", 3);
+    earth_.texture_.bind();
+
+    unit_sphere_mesh_.draw();
+    earth_shader_.disable();
+
     // Phong shader
     phong_shader_.use(); //init
     phong_shader_.set_uniform("light_position", light);     // set light position
@@ -597,16 +619,19 @@ void Solar_viewer::draw_scene(mat4& projection, mat4& view)
 
     for (Space_Object* planet : planets_)
     {
+        //als erstes hier die erde herrausnehmen, die soll eine besondere behandlung kriegeb
+        if(planet->name_ == "earth") {
+            continue;
+        }
+
         m_matrix = planet -> model_matrix_;
         mv_matrix = view * m_matrix;
         mvp_matrix = projection * mv_matrix;
 
-        //________________________________
         n_matrix = inverse(transpose(mat3(mv_matrix)));  // the normal matrix is just the 3x3 matrix of the modelviewmatrix
         phong_shader_.set_uniform("modelview_projection_matrix", mvp_matrix);   // setting
-        phong_shader_.set_uniform("modelvied_matrix", mv_matrix);               // some
+        phong_shader_.set_uniform("modelview_matrix", mv_matrix);               // some
         phong_shader_.set_uniform("normal_matrix", n_matrix);                   // variables
-        //________________________________
 
         //diese zeile war urspruenglich einkommentiert
         //color_shader_.set_uniform("modelview_projection_matrix", mvp_matrix);
@@ -614,7 +639,6 @@ void Solar_viewer::draw_scene(mat4& projection, mat4& view)
         unit_sphere_mesh_.draw();
     }
 
-    //___________________Veraenderung_Ende___________________________
     // check for OpenGL errors
     glCheckError();
 }

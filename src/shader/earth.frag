@@ -8,6 +8,7 @@ in vec3 v2f_view;
 
 out vec4 f_color;
 
+//wir haben hier vier verschiedene texturen, das ist krass
 uniform sampler2D day_texture;
 uniform sampler2D night_texture;
 uniform sampler2D cloud_texture;
@@ -36,5 +37,48 @@ void main()
     *   - There is not the one right way to get the desired results. Feel free to use some magic numbers or creative solutions.
      */
     
+    //UEBERNOMMEN AUS PHONG.frag---------------------------------------------------------------
+
+    vec3 color = vec3(0.0,0.0,0.0);
+
+
+    //neu
+
+    //das eines sind farben -> vec3 und das andere nur greyscales deswegen nur float
+    //man kann es sich wie ein gewicht vorstellen, wie wolkig ist es dort
+    //gloss = 0 no reflections, gloss = 1 reflections
+
+    vec3 day = texture(day_texture, v2f_texcoord.st).rgb;
+    vec3 night = texture(night_texture, v2f_texcoord.st).rgb;
+    float gloss = texture(gloss_texture, v2f_texcoord.st).a;
+    float cloudiness = texture(cloud_texture, v2f_texcoord.st).a;
+
+    //clouds are not specular = wolken reflextieren nicht
+    gloss *= (1.0 - cloudiness);
+
+    //ende neu
+
+
+    vec3 material = texture(day_texture, v2f_texcoord.st).rgb;
+    float alpha = texture(day_texture, v2f_texcoord.st).a;
+
+    vec3 N = normalize(v2f_normal);
+    vec3 L = v2f_light;
+    vec3 R = reflect(-L,N);         //aktuell ist L zur quelle, deswegen irgendwie ein minus
+    vec3 V = normalize(v2f_view);   //eben schon bestimmt
+    
+    
+    float diffuse = max(0.0, dot(N,L)); 
+
+    float specular = 0.0;
+    if(diffuse != 0.0) {
+        specular = pow( max(0.0, dot(R,V)), shininess );
+    }
+
+    if (greyscale) color = vec3(0.299*color.r+0.587*color.g+0.114*color.b);
+    color = sunlight * ((0.2 * material) + (material * diffuse));
+    f_color = vec4(color, alpha);
+
+    //ENDE UEBERNOMMEN AUS PHONG.FRAG----------------------------------------------------------------------
 
 }
