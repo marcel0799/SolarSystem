@@ -1,0 +1,6 @@
+<map id="Solar_viewer" name="Solar_viewer">
+<area shape="rect" id="node3" href="$classSpace__Object.html" title="default class for the planet " alt="" coords="196,171,300,197"/>
+<area shape="rect" id="node6" href="$classEarth.html" title="earth is a special planet, because we need access to more textures " alt="" coords="205,305,259,332"/>
+<area shape="rect" id="node7" href="$classMoon.html" title="Moon is a special planet, because it does not evolve around the sun. " alt="" coords="283,305,338,332"/>
+<area shape="rect" id="node4" href="$classBillboard.html" title="Billboard" alt="" coords="212,81,284,108"/>
+</map>

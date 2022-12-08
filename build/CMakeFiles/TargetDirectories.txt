@@ -1,0 +1,9 @@
+C:/Users/marce/Desktop/solar_system/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/marce/Desktop/solar_system/build/CMakeFiles/ZERO_CHECK.dir
+C:/Users/marce/Desktop/solar_system/build/external/stb_image/CMakeFiles/stb_image.dir
+C:/Users/marce/Desktop/solar_system/build/external/glew/CMakeFiles/glew.dir
+C:/Users/marce/Desktop/solar_system/build/external/glfw/CMakeFiles/ALL_BUILD.dir
+C:/Users/marce/Desktop/solar_system/build/external/glfw/src/CMakeFiles/update_mappings.dir
+C:/Users/marce/Desktop/solar_system/build/external/glfw/src/CMakeFiles/glfw.dir
+C:/Users/marce/Desktop/solar_system/build/external/utils/CMakeFiles/utils.dir
+C:/Users/marce/Desktop/solar_system/build/src/CMakeFiles/solarsystem.dir

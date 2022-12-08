@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\marce\Desktop\solar_system\build\CMakeFiles\e2b3b0e1d871ee995fcdfd35e2ce016a\update_mappings.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marce\Desktop\solar_system\external\glfw\src\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\marce\Desktop\solar_system\external\glfw\src\mappings.h.in">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="C:\Users\marce\Desktop\solar_system\external\glfw\CMake\GenerateMappings.cmake" />
+    <None Include="C:\Users\marce\Desktop\solar_system\build\external\glfw\src\CMakeFiles\update_mappings" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{824124AC-506B-3BFE-B83C-BCA85667BB63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{61318C8A-2C2E-373F-A322-D0DEA7D62EC7}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
